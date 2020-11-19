@@ -12,7 +12,7 @@ def main() -> None:
             VaisalaSensor(communication_queue)
         ]
 
-        streams = [StreamService()]
+        streams = [StreamService(communication_queue)]
 
         for process in [Process(target=s.run) for s in sensors + streams]:
             stack.enter_context(process)
