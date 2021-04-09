@@ -1,4 +1,4 @@
-from multiprocessing import Queue
+from context import Queue
 
 from osc4py3.as_eventloop import osc_startup, osc_udp_client, osc_send, osc_process, osc_terminate
 from osc4py3.oscbuildparse import OSCMessage
@@ -7,7 +7,7 @@ from .constants import ADDRESS, PORT, CLIENT_NAME
 
 
 class StreamService:
-    def __init__(self, queue: Queue[OSCMessage]) -> None:
+    def __init__(self, queue: Queue) -> None:
         self.__queue = queue
 
     def __enter__(self) -> "StreamService":

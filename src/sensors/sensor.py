@@ -1,16 +1,17 @@
-from multiprocessing import Queue
+from context import Queue
 
 from osc4py3.oscbuildparse import OSCMessage
 
 
 class Sensor:
-    def __init__(self, queue: Queue[OSCMessage]) -> None:
+    def __init__(self, queue: Queue) -> None:
         self.queue = queue
 
     def run(self) -> None:
         while True:
             data = self.read_device()
-            self.send_data(data)
+            print(data)
+            # self.send_data(data)
 
     def read_device(self):
         raise NotImplementedError

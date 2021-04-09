@@ -15,6 +15,7 @@ def main() -> None:
         streams = [StreamService(communication_queue)]
 
         for process in [Process(target=s.run) for s in sensors + streams]:
+            process.start()
             stack.enter_context(process)
 
 
