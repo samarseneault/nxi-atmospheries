@@ -1,5 +1,4 @@
-from context import Queue
-
+from multiprocessing import Queue
 from osc4py3.as_eventloop import osc_startup, osc_udp_client, osc_send, osc_process, osc_terminate
 from osc4py3.oscbuildparse import OSCMessage
 

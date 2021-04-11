@@ -1,6 +1,6 @@
 from .sensor import Sensor
-from context import Queue
 
+from multiprocessing import Queue
 from osc4py3.oscbuildparse import OSCMessage
 from serial import Serial
 

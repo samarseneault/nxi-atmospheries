@@ -1,5 +1,4 @@
-from context import Queue
-
+from multiprocessing import Queue
 from osc4py3.oscbuildparse import OSCMessage
 
 

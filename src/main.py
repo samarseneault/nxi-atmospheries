@@ -1,17 +1,15 @@
 from contextlib import ExitStack
+from multiprocessing import Queue
 
-from context import Process, Queue
+from context import Process
 from sensors import BoltekSensor, VaisalaSensor
 from streaming.stream_service import StreamService
 
 
 def main() -> None:
-    with ExitStack() as stack, Queue() as communication_queue:
-        sensors = [
-            BoltekSensor(communication_queue),
-            VaisalaSensor(communication_queue)
-        ]
-
+    communication_queue = Queue()
+    with ExitStack() as stack:
+        sensors = [BoltekSensor(communication_queue)]
         streams = [StreamService(communication_queue)]
 
         for process in [Process(target=s.run) for s in sensors + streams]:
