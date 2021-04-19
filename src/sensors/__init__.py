@@ -1,3 +1,3 @@
 from .boltek import BoltekSensor
 from .sensor import Sensor
-from .vaisala import VaisalaSensor
+from .lidar import Lidar
