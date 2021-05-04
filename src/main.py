@@ -1,17 +1,13 @@
-from contextlib import ExitStack
-from multiprocessing import Process, Queue
+from threading import Thread
 
 from sensors import BoltekSensor, Lidar
-from streaming.stream_service import StreamService
 
 
 def main() -> None:
-    communication_queue = Queue()
-    sensors = [Lidar(communication_queue)]
-    streams = [StreamService(communication_queue)]
+    sensors = [Lidar()]
 
-    for process in [Process(target=s.run) for s in sensors + streams]:
-        process.start()
+    for thread in [Thread(target=s.run) for s in sensors]:
+        thread.start()
 
 
 if __name__ == "__main__":
