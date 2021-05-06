@@ -5,8 +5,8 @@ from serial import Serial, SEVENBITS, PARITY_MARK, STOPBITS_ONE
 
 
 class Lidar(Sensor):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, client_name: str) -> None:
+        super().__init__(client_name)
         self.serial_reader = Serial(port="COM5",
                                     baudrate=9600,
                                     bytesize=SEVENBITS,

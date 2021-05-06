@@ -1,3 +1,2 @@
-ADDRESS = "127.0.0.1"
+ADDRESS = "132.208.171.213"  # Vincent's adress on wired PC
 PORT = 5000
-CLIENT_NAME = ""

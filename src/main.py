@@ -4,7 +4,7 @@ from sensors import BoltekSensor, Lidar
 
 
 def main() -> None:
-    sensors = [Lidar()]
+    sensors = [Lidar("lidar_client")]
 
     for thread in [Thread(target=s.run) for s in sensors]:
         thread.start()
