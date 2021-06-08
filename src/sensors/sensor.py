@@ -10,7 +10,7 @@ class Sensor:
         osc_startup()
         osc_udp_client(ADDRESS, PORT, client_name)  # Make client channels to send packets.
 
-    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+    def __del__(self) -> None:
         osc_terminate()
 
     def run(self) -> None:
