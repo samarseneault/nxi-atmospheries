@@ -1,2 +1,2 @@
-ADDRESS = "132.208.171.213"  # Vincent's adress on wired PC
+ADDRESS = "132.208.171.255"  # Broadcast on NXI network
 PORT = 5000
