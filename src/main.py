@@ -4,7 +4,8 @@ from sensors import ElectricFieldMonitor, Lidar
 
 
 def main() -> None:
-    sensors = [Lidar("lidar")]
+    sensors = [Lidar("lidar"),
+               ElectricFieldMonitor("boltek")]
 
     for thread in [Thread(target=s.run) for s in sensors]:
         thread.start()
