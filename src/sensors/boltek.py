@@ -1,7 +1,7 @@
 from .sensor import Sensor
 
 from osc4py3.oscbuildparse import OSCMessage
-from serial import Serial, EIGHTBITS, PARITY_MARK, STOPBITS_ONE
+from serial import Serial, EIGHTBITS, PARITY_NONE, STOPBITS_ONE
 
 
 class ElectricFieldMonitor(Sensor):
@@ -10,7 +10,7 @@ class ElectricFieldMonitor(Sensor):
         self.serial_reader = Serial(port="COM5",
                                     baudrate=9600,
                                     bytesize=EIGHTBITS,
-                                    parity=PARITY_MARK,
+                                    parity=PARITY_NONE,
                                     stopbits=STOPBITS_ONE)
 
     def read_device(self):

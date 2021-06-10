@@ -26,6 +26,6 @@ class Sensor:
         raise NotImplementedError
 
     def send_data(self, data: OSCMessage) -> None:
-        osc_send(OSCMessage("/", ",s", [data]), self.client_name)
+        osc_send(OSCMessage(f"/{self.client_name}", ",s", [data]), self.client_name)
         osc_process()  # Needs to be called for the thread to process the "transaction"
 
