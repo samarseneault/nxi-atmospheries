@@ -1,14 +1,14 @@
 from osc4py3.as_eventloop import osc_startup, osc_udp_client, osc_send, osc_process, osc_terminate
 from osc4py3.oscbuildparse import OSCMessage
 
-from .constants import ADDRESS, PORT
+from constants import OSC_ADDRESS, OSC_PORT
 
 
 class Sensor:
     def __init__(self, client_name: str) -> None:
         self.client_name = client_name
         osc_startup()
-        osc_udp_client(ADDRESS, PORT, client_name)  # Make client channels to send packets.
+        osc_udp_client(OSC_ADDRESS, OSC_PORT, client_name)  # Make client channels to send packets.
 
     def __del__(self) -> None:
         osc_terminate()
