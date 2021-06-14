@@ -34,7 +34,7 @@ def stream_multisensor() -> str:
 def start_osc_server() -> None:
     print("Starting OSC server thread...")
 
-    osc_server = OSCServer()
+    osc_server = OSCServer(boltek_data, lidar_data, multisensor_data)
     osc_server_thread = Thread(target=osc_server.run())
     osc_server_thread.start()
 
@@ -43,7 +43,7 @@ def start_osc_server() -> None:
 
 def main() -> None:
     start_osc_server()
-    
+
     app.run(host="0.0.0.0", port=5001)
 
 
