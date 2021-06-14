@@ -1,7 +1,7 @@
 from queue import Queue
 
 from flask import Flask
-from osc4py3.as__common import osc_method, osc_startup, osc_udp_server
+from osc4py3.as_eventloop import osc_method, osc_startup, osc_udp_server
 
 from constants import OSC_PORT, BOLTEK_NAME, LIDAR_NAME, MULTISENSOR_NAME
 
@@ -44,9 +44,9 @@ def osc_handle_multisensor(data: str) -> None:
 
 def setup_osc_servers() -> None:
     osc_startup()
-    osc_udp_server(BOLTEK_NAME, "0.0.0.0", OSC_PORT)
-    osc_udp_server(LIDAR_NAME, "0.0.0.0", OSC_PORT)
-    osc_udp_server(MULTISENSOR_NAME, "0.0.0.0", OSC_PORT)
+    osc_udp_server("0.0.0.0", OSC_PORT, BOLTEK_NAME)
+    osc_udp_server("0.0.0.0", OSC_PORT, LIDAR_NAME)
+    osc_udp_server("0.0.0.0", OSC_PORT, MULTISENSOR_NAME)
 
 
 def setup_osc_handlers() -> None:
