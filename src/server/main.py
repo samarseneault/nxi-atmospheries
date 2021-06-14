@@ -1,5 +1,4 @@
-from multiprocessing import Queue
-from threading import Thread
+from multiprocessing import Process, Queue
 
 from flask import Flask
 
@@ -35,7 +34,7 @@ def start_osc_server() -> None:
     print("Starting OSC server thread...")
 
     osc_server = OSCServer(boltek_data, lidar_data, multisensor_data)
-    osc_server_thread = Thread(target=osc_server.run())
+    osc_server_thread = Process(target=osc_server.run)
     osc_server_thread.start()
 
     print("Done.")

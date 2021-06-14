@@ -1,5 +1,6 @@
 from multiprocessing import Queue
 from osc4py3.as_eventloop import osc_method, osc_process, osc_startup, osc_udp_server
+from time import sleep
 
 from constants import OSC_PORT, BOLTEK_NAME, LIDAR_NAME, MULTISENSOR_NAME
 
@@ -9,13 +10,14 @@ class OSCServer:
         self.boltek_data = boltek_data
         self.lidar_data = lidar_data
         self.multisensor_data = multisensor_data
-        
+
         self.setup_osc_servers()
         self.setup_osc_handlers()
 
     def run(self) -> None:
         while True:
             osc_process()
+            sleep(0.01)
 
     def osc_handle_boltek(self, data: str) -> None:
         self.boltek_data.put(data)
