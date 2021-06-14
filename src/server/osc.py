@@ -20,12 +20,21 @@ class OSCServer:
             sleep(0.01)
 
     def osc_handle_boltek(self, data: str) -> None:
+        if not self.boltek_data.empty():
+            self.boltek_data.get()
+
         self.boltek_data.put(data)
 
     def osc_handle_lidar(self, data: str) -> None:
+        if not self.boltek_data.empty():
+            self.boltek_data.get()
+        
         self.lidar_data.put(data)
 
     def osc_handle_multisensor(self, data: str) -> None:
+        if not self.boltek_data.empty():
+            self.boltek_data.get()
+        
         self.multisensor_data.put(data)
 
     def setup_osc_servers(self) -> None:

@@ -7,7 +7,7 @@ from osc import OSCServer
 
 
 app = Flask(__name__)
-boltek_data, lidar_data, multisensor_data = Queue(), Queue(), Queue()
+boltek_data, lidar_data, multisensor_data = Queue(1), Queue(1), Queue(1)
 
 
 @app.route("/")
