@@ -1,9 +1,10 @@
-from queue import Queue
+from multiprocessing import Queue
+from threading import Thread
 
 from flask import Flask
-from osc4py3.as_eventloop import osc_method, osc_startup, osc_udp_server
 
-from constants import OSC_PORT, BOLTEK_NAME, LIDAR_NAME, MULTISENSOR_NAME
+from constants import BOLTEK_NAME, LIDAR_NAME, MULTISENSOR_NAME
+from osc import OSCServer
 
 
 app = Flask(__name__)
@@ -30,36 +31,20 @@ def stream_multisensor() -> str:
     return multisensor_data.get()
 
 
-def osc_handle_boltek(data: str) -> None:
-    boltek_data.put(data)
+def start_osc_server() -> None:
+    print("Starting OSC server thread...")
 
+    osc_server = OSCServer()
+    osc_server_thread = Thread(target=osc_server.run())
+    osc_server_thread.start()
 
-def osc_handle_lidar(data: str) -> None:
-    lidar_data.put(data)
-
-
-def osc_handle_multisensor(data: str) -> None:
-    multisensor_data.put(data)
-
-
-def setup_osc_servers() -> None:
-    osc_startup()
-    osc_udp_server("0.0.0.0", OSC_PORT, BOLTEK_NAME)
-    osc_udp_server("0.0.0.0", OSC_PORT, LIDAR_NAME)
-    osc_udp_server("0.0.0.0", OSC_PORT, MULTISENSOR_NAME)
-
-
-def setup_osc_handlers() -> None:
-    osc_method(f"/{BOLTEK_NAME}", osc_handle_boltek)
-    osc_method(f"/{LIDAR_NAME}", osc_handle_lidar)
-    osc_method(f"/{MULTISENSOR_NAME}", osc_handle_multisensor)
+    print("Done.")
 
 
 def main() -> None:
-    setup_osc_servers()
-    setup_osc_handlers()
-
-    app.run(host="0.0.0.0", port=5000)
+    start_osc_server()
+    
+    app.run(host="0.0.0.0", port=5001)
 
 
 if __name__ == "__main__":
