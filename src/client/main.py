@@ -6,8 +6,7 @@ from sensors import ElectricFieldMonitor, Lidar, MultiSensor
 
 def main() -> None:
     sensors = [Lidar(LIDAR_NAME),
-               ElectricFieldMonitor(BOLTEK_NAME),
-               MultiSensor(MULTISENSOR_NAME)]
+               ElectricFieldMonitor(BOLTEK_NAME)]
 
     for thread in [Thread(target=s.run) for s in sensors]:
         thread.start()
